@@ -1,6 +1,3 @@
-// https://www.youtube.com/watch?v=_JTTzXmx0r0&ab_channel=Kavsoft
-// https://hoshi0523.hatenablog.com/entry/2020/10/24/214520
-
 import SwiftUI
 
 enum TabType: String, CaseIterable {
@@ -8,7 +5,6 @@ enum TabType: String, CaseIterable {
     case banana = "Banana🍌"
     case avocado = "Avocado🥑"
 } 
-
 
 struct TabView: View {
     @Namespace private var namespace
@@ -62,12 +58,11 @@ struct TabItemBackground: View {
         if isSelected {
             Capsule()
                 .fill(Color.tabGray)
-                .matchedGeometryEffect(id: "Button", in: namespace) // protocolからクラス名
+                .matchedGeometryEffect(id: "Button", in: namespace)
         }
     }
 }
 
-// fixme
 extension Color {
     static let tabGray = Color(red: 0.259, green: 0.259, blue: 0.259)
 }
