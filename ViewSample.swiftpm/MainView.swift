@@ -6,13 +6,13 @@ struct MainView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                LazyVStack {
+                LazyVStack(spacing: 8) {
                     ForEach(SampleType.allCases, id: \.rawValue) {
                         MainRow(type: $0)
                     }
                 }
-                .background(.white)
             }
+            .background(.white)
         }
         .navigationViewStyle(.stack)
     }
@@ -28,8 +28,9 @@ struct MainRow: View {
                 .navigationBarTitle(type.title, displayMode: .inline)
         }, label: {
             Text(type.title)
+                .frame(width: 300, height: 60)
                 .foregroundColor(.black)
-                .padding()
+                .border(.black, width: 1)
         })
     }
 }

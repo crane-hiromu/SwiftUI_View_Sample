@@ -1,13 +1,13 @@
 import SwiftUI
 
 // MARK: - ViewModel
-final class WrapperViewModel: ObservableObject {
+final class TabWrapperViewModel: ObservableObject {
     @Published var tabType: TabType = .banana
 }
 
 // MARK: - Parent
 struct TabWrapperView: View {
-    @ObservedObject var viewModel: WrapperViewModel = .init()
+    @ObservedObject var viewModel: TabWrapperViewModel = .init()
     
     var body: some View {
         ScrollView {
