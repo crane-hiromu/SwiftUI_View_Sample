@@ -1,11 +1,6 @@
 import SwiftUI
 
-enum TabType: String, CaseIterable {
-    case apple = "Apple🍎"
-    case banana = "Banana🍌"
-    case avocado = "Avocado🥑"
-} 
-
+// MARK: - View
 struct TabView: View {
     @Namespace private var namespace
     let tabType: TabType
@@ -63,6 +58,7 @@ struct TabItemBackground: View {
     }
 }
 
-extension Color {
+// sample color
+private extension Color {
     static let tabGray = Color(red: 0.259, green: 0.259, blue: 0.259)
 }

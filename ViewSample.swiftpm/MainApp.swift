@@ -1,11 +1,11 @@
 import SwiftUI
 
 @main
-struct MyApp: App {
+struct MainApp: App {
     
     var body: some Scene {
         WindowGroup {
-            WrapperView(viewModel: .init())
+            MainView()
         }
     }
 }
