@@ -20,7 +20,6 @@ struct RectangleWrapperView: View {
                 }
                 Spacer()
             }
-//            .background(.black)
         }
     }
 }
