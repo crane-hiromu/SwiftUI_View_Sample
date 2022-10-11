@@ -1,8 +1,17 @@
 # View Sample
 
-## Tab
+<br>
 
-
+## - Tab
 
 https://user-images.githubusercontent.com/24838521/194446426-d4c617ba-a4ff-4509-a546-4224b683e264.mp4
 
+<br>
+
+## - Variable Rectangle
+
+|iPhone|iPad|
+|:---:|:---:|
+|<img width="397" alt="Screen Shot 2022-10-07 at 15 44 44" src="https://user-images.githubusercontent.com/24838521/194484997-58344c95-2a4c-441d-a1e5-210f366721cc.png">|<img width="748" alt="Screen Shot 2022-10-07 at 15 44 33" src="https://user-images.githubusercontent.com/24838521/194484992-27139684-fc86-43c4-8cc9-10574e7a8fdc.png">|
+
+<br>
