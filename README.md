@@ -8,6 +8,14 @@ https://user-images.githubusercontent.com/24838521/194446426-d4c617ba-a4ff-4509-
 
 <br>
 
+## - Carousel
+
+https://user-images.githubusercontent.com/24838521/194994229-861aa67c-cf23-44db-834d-8bb4dc905c5d.mp4
+
+auto scroll every 4 seconds
+
+<br>
+
 ## - Variable Rectangle
 
 |iPhone|iPad|
