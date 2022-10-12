@@ -22,7 +22,8 @@ https://user-images.githubusercontent.com/24838521/195236738-5c6c74e3-b862-40b4-
 
 https://user-images.githubusercontent.com/24838521/194994229-861aa67c-cf23-44db-834d-8bb4dc905c5d.mp4
 
-auto scroll every 4 seconds
+- auto scroll every 4 seconds
+- no paging
 
 <br>
 
