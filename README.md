@@ -8,6 +8,16 @@ https://user-images.githubusercontent.com/24838521/194446426-d4c617ba-a4ff-4509-
 
 <br>
 
+## - Paging
+
+
+
+https://user-images.githubusercontent.com/24838521/195236738-5c6c74e3-b862-40b4-8657-c3192d5d7755.mp4
+
+
+
+<br>
+
 ## - Carousel
 
 https://user-images.githubusercontent.com/24838521/194994229-861aa67c-cf23-44db-834d-8bb4dc905c5d.mp4
