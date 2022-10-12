@@ -70,6 +70,7 @@ extension CarouselWrapperViewModel {
             .store(in: &store.cancellables)
         
         timerRepository.timer
+            .dropFirst()
             .filter { !output.models.isEmpty }
             .map {
                 guard binding.scrollIndex < output.models.count-1 else { return 0 }

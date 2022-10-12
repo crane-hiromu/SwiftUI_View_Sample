@@ -14,7 +14,6 @@ struct CarouselWrapperView: View {
                 didChangeOffset: { viewModel.input.didChangeOffset.send($0) }
             )
         }
-        
     }
 }
 
