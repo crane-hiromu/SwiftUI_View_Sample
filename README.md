@@ -20,7 +20,8 @@ https://user-images.githubusercontent.com/24838521/195236738-5c6c74e3-b862-40b4-
 
 ## - Carousel(ScrollView + ScrollViewReader)
 
-https://user-images.githubusercontent.com/24838521/194994229-861aa67c-cf23-44db-834d-8bb4dc905c5d.mp4
+https://user-images.githubusercontent.com/24838521/195553802-0940728b-920d-4947-85db-977a85f6b2e2.mp4
+
 
 - auto scroll every 4 seconds
 - no paging
