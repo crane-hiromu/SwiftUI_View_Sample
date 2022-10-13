@@ -30,8 +30,7 @@ https://user-images.githubusercontent.com/24838521/194994229-861aa67c-cf23-44db-
 ## - Paging Carousel(ScrollView + GeometryReader + DragGesture)
 
 
-https://user-images.githubusercontent.com/24838521/195490005-c64db7d4-19c6-4dbd-b533-7745864257ed.mp4
-
+https://user-images.githubusercontent.com/24838521/195547549-3c06249a-247e-457e-bc28-bcc6f7a129ce.mp4
 
 
 - auto scroll every 4 seconds
