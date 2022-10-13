@@ -2,7 +2,7 @@ import Combine
 import Foundation
 
 // MARK: - Protocol
-protocol TimelineCarouselTimerRepositoryProtocol {
+protocol CarouselTimerRepositoryProtocol {
     var timer: AnyPublisher<(), Never> { get }
     
     func set()
@@ -10,14 +10,14 @@ protocol TimelineCarouselTimerRepositoryProtocol {
 }
 
 // MARK: - Repository
-final class TimelineCarouselTimerRepository {
+final class CarouselTimerRepository {
     var timer: AnyPublisher<(), Never> { _timer.eraseToAnyPublisher() }
     private var _timer = PassthroughSubject<(), Never>()
     private var cancellables: Set<AnyCancellable> = []
 }
 
-// MARK: - TimelineCarouselTimerRepositoryProtocol
-extension TimelineCarouselTimerRepository: TimelineCarouselTimerRepositoryProtocol {
+// MARK: - CarouselTimerRepositoryProtocol
+extension CarouselTimerRepository: CarouselTimerRepositoryProtocol {
     
     func set() {
         Timer

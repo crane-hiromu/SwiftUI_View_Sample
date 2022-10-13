@@ -8,7 +8,7 @@ final class CarouselWrapperViewModel: ObservableObject {
     var output: Output
     @ObservedObject var binding: Binding
     
-    var timerRepository = TimelineCarouselTimerRepository()
+    var timerRepository = CarouselTimerRepository()
     
     init(
         input: Input = .init(),

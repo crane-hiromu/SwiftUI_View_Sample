@@ -41,27 +41,34 @@ struct CarouselView: View {
             .frame(height: itemWidth)
             .padding(.bottom, 54)
             .onReceive(Just(scrollIndex)) { index in
-                guard !models.isEmpty else { return }
+                guard index < models.count else { return }
                 withAnimation {
                     proxy.scrollTo(models[index].id, anchor: .center)
                 }
             }
+            .gesture(
+                DragGesture()
+                    .onChanged({ value in
+                        print(value)
+                    })
+                    .onEnded({ value in
+                        print(value)
+                    })
+            )
         }
     }
     
     private var bannerCollection: some View {
-        HStack {
-            LazyHStack(spacing: 8) {
-                ForEach(models, id: \.id) { model in
-                    CarouselItem(
-                        width: itemWidth, 
-                        model: model,
-                        didTap: { didTapItem(model) }
-                    ).id(model.id)
-                }
+        LazyHStack(spacing: 8) {
+            ForEach(models, id: \.id) { model in
+                CarouselItem(
+                    width: itemWidth,
+                    model: model,
+                    didTap: { didTapItem(model) }
+                ).id(model.id)
             }
-            .padding([.leading, .trailing], padding)
         }
+        .padding([.leading, .trailing], padding)
     }
 }
 
@@ -82,11 +89,14 @@ private struct CarouselItem: View {
 
 // MARK: - Model
 final class CarouselItemModel {
+    static let itemWidth: CGFloat = 320
+    static let itemSpacing: CGFloat = 8.0
+    
     var id: Int = UUID().hashValue
     var imageUrl: URL? = nil
     
     static let stub: [CarouselItemModel] = [
-        .init(), .init(), .init(), .init(), .init()
+        .init(), .init(), .init()
     ]
 }
 
