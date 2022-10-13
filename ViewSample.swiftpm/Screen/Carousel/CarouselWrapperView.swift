@@ -6,24 +6,26 @@ struct CarouselWrapperView: View {
     
     var body: some View {
         GeometryReader { proxy in
-            CarouselView(
-                size: proxy.size, 
-                models: CarouselItemModel.stub, 
-                scrollIndex: viewModel.$binding.scrollIndex,
-                didTapItem: { _ in },
-                didChangeOffset: { viewModel.input.didChangeOffset.send($0) }
-            )
+            VStack {
+                CarouselView(
+                    size: proxy.size, 
+                    models: CarouselItemModel.stub, 
+                    scrollIndex: viewModel.$binding.scrollIndex,
+                    didTapItem: { _ in },
+                    didChangeOffset: { viewModel.input.didChangeOffset.send($0) }
+                )
+                .onAppear { viewModel.input.didAppear.send(()) }
+                .onDisappear { viewModel.input.didDisappear.send(()) }
+                
+                Toggle("Auto swipe enabled (4 sec): ", isOn: viewModel.$binding.scrollTimerEnabled)
+                    .frame(width: CarouselItemModel.itemWidth)
+            }
         }
     }
 }
 
 // MARK: - View
 struct CarouselView: View {
-    private let itemWidth: CGFloat = 320
-    private var padding: CGFloat {
-        (size.width - itemWidth) / 2
-    }
-    
     let size: CGSize
     let models: [CarouselItemModel]
     @Binding var scrollIndex: Int
@@ -38,43 +40,31 @@ struct CarouselView: View {
                 content: { bannerCollection },
                 onChangeOffset: didChangeOffset
             )
-            .frame(height: itemWidth)
-            .padding(.bottom, 54)
+            .frame(height: CarouselItemModel.itemWidth)
             .onReceive(Just(scrollIndex)) { index in
                 guard index < models.count else { return }
                 withAnimation {
                     proxy.scrollTo(models[index].id, anchor: .center)
                 }
             }
-            .gesture(
-                DragGesture()
-                    .onChanged({ value in
-                        print(value)
-                    })
-                    .onEnded({ value in
-                        print(value)
-                    })
-            )
         }
     }
     
     private var bannerCollection: some View {
-        LazyHStack(spacing: 8) {
+        LazyHStack(spacing: CarouselItemModel.itemSpacing) {
             ForEach(models, id: \.id) { model in
                 CarouselItem(
-                    width: itemWidth,
                     model: model,
                     didTap: { didTapItem(model) }
                 ).id(model.id)
             }
         }
-        .padding([.leading, .trailing], padding)
+        .padding([.leading, .trailing], CarouselItemModel.padding(size: size))
     }
 }
 
 // MARK: - Item
 private struct CarouselItem: View {
-    let width: CGFloat
     let model: CarouselItemModel
     let didTap: () -> Void
     
@@ -82,21 +72,11 @@ private struct CarouselItem: View {
         Button(action: didTap) {
             Image("320x320")
                 .resizable()
-                .frame(width: width, height: width)
+                .frame(
+                    width: CarouselItemModel.itemWidth,
+                    height: CarouselItemModel.itemWidth
+                )
         }
+        .buttonStyle(LongPressHighlightStyle())
     }
 }
-
-// MARK: - Model
-final class CarouselItemModel {
-    static let itemWidth: CGFloat = 320
-    static let itemSpacing: CGFloat = 8.0
-    
-    var id: Int = UUID().hashValue
-    var imageUrl: URL? = nil
-    
-    static let stub: [CarouselItemModel] = [
-        .init(), .init(), .init()
-    ]
-}
-

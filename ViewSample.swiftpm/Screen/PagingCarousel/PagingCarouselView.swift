@@ -6,56 +6,57 @@ struct PagingCarouselWarapperView: View {
     
     var body: some View {
         GeometryReader { proxy in
-            PagingCarouselView(
-                size: proxy.size,
-                models: viewModel.models,
-                scrollIndex: $viewModel.scrollIndex,
-                scrollOffset: $viewModel.scrollOffset,
-                didScroll: { viewModel.didScroll.send($0) },
-                didEndScroll: { viewModel.didEndScroll.send($0) }
-            )
+            VStack {
+                PagingCarouselView(
+                    size: proxy.size,
+                    models: viewModel.output.models,
+                    scrollIndex: viewModel.$binding.scrollIndex,
+                    scrollOffset: viewModel.$binding.scrollOffset,
+                    didTapItem: { viewModel.input.didTapItem.send($0) },
+                    didScroll: { viewModel.input.didScroll.send($0) },
+                    didEndScroll: { viewModel.input.didEndScroll.send($0) }
+                )
+                .onAppear { viewModel.input.didAppear.send(()) }
+                .onDisappear { viewModel.input.didDisappear.send(()) }
+                
+                Toggle("Auto swipe enabled (4 sec): ", isOn: viewModel.$binding.scrollTimerEnabled)
+                    .frame(width: CarouselItemModel.itemWidth)
+            }
         }
     }
 }
 
 // MARK: - View
 struct PagingCarouselView: View {
-    
-    private var padding: CGFloat {
-        // カルーセル開始位置を中央寄せにする
-        (size.width - CarouselItemModel.itemWidth) / 2
-    }
-    
     let size: CGSize
     let models: [CarouselItemModel]
     @Binding var scrollIndex: Int
     @Binding var scrollOffset: CGFloat
     
+    let didTapItem: (CarouselItemModel) -> Void
     let didScroll: (CGFloat) -> Void
     let didEndScroll: (CGFloat) -> Void
     
     var body: some View {
-        GeometryReader { geometry in
-            ScrollView(.horizontal, showsIndicators: false) { collection }
-                .content.offset(x: scrollOffset)
-                .frame(width: geometry.size.width, alignment: .leading)
-                .gesture(gestures)
-        }
+        ScrollView(.horizontal, showsIndicators: false) { collection }
+            .content.offset(x: scrollOffset)
+            .frame(width: size.width, height: CarouselItemModel.itemWidth, alignment: .leading)
+            .simultaneousGesture(dragGestures)
     }
     
     private var collection: some View {
         LazyHStack(spacing: CarouselItemModel.itemSpacing) {
             ForEach(models, id: \.id) { model in
                 PagingCarouselItem(
-                    model: model,
-                    didTap: { }
+                    model: model, 
+                    didTap: { didTapItem(model) }
                 )
             }
         }
-        .padding([.leading, .trailing], padding)
+        .padding([.leading, .trailing], CarouselItemModel.padding(size: size))
     }
     
-    private var gestures: some Gesture {
+    private var dragGestures: some Gesture {
         DragGesture()
             .onChanged { didScroll($0.translation.width) }
             .onEnded { didEndScroll($0.predictedEndTranslation.width) }
@@ -68,11 +69,15 @@ private struct PagingCarouselItem: View {
     let didTap: () -> Void
     
     var body: some View {
-        Image("320x320")
-            .resizable()
-            .frame(
-                width: CarouselItemModel.itemWidth,
-                height: CarouselItemModel.itemWidth
-            )
+        Button(action: didTap) {
+            Image("320x320")
+                .resizable()
+                .frame(
+                    width: CarouselItemModel.itemWidth,
+                    height: CarouselItemModel.itemWidth
+                )
+        }
+        .buttonStyle(LongPressHighlightStyle())
     }
 }
+

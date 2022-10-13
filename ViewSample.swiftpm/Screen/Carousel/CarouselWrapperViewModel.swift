@@ -1,27 +1,34 @@
 import SwiftUI
 import Combine
 
+// MARK: - Dependency
+final class CarouselWrapperDependency: DynamicProperty {
+    var timerRepository = CarouselTimerRepository()
+}
+
 // MARK: - ViewModel
 final class CarouselWrapperViewModel: ObservableObject {
-    var store: Store
-    var input: Input
-    var output: Output
+    let dependency: CarouselWrapperDependency
+    let store: Store
+    let input: Input
+    let output: Output
     @ObservedObject var binding: Binding
     
-    var timerRepository = CarouselTimerRepository()
-    
     init(
+        dependency: CarouselWrapperDependency = .init(),
         input: Input = .init(),
         output: Output = .init(), 
         binding: Binding = .init(),
         store: Store = .init()
     ) {
+        self.dependency = dependency
         self.input = input
         self.output = output
         self.binding = binding
         self.store = store
         
-        bind(input: input,
+        bind(dependency: dependency,
+             input: input,
              output: output,
              binding: binding,
              store: store)
@@ -31,6 +38,8 @@ final class CarouselWrapperViewModel: ObservableObject {
 extension CarouselWrapperViewModel {
     
     final class Input {
+        let didAppear = PassthroughSubject<(), Never>()
+        let didDisappear = PassthroughSubject<(), Never>()
         let didChangeOffset = PassthroughSubject<CGPoint, Never>()
     }
     
@@ -40,6 +49,7 @@ extension CarouselWrapperViewModel {
     
     final class Binding: ObservableObject {
         @Published var scrollIndex: Int = 0
+        @Published var scrollTimerEnabled: Bool = false
     }
     
     final class Store {
@@ -52,6 +62,7 @@ extension CarouselWrapperViewModel {
 extension CarouselWrapperViewModel {
     
     func bind(
+        dependency: CarouselWrapperDependency,
         input: Input,
         output: Output, 
         binding: Binding,
@@ -64,13 +75,33 @@ extension CarouselWrapperViewModel {
             }
             .store(in: &store.cancellables)
         
+        input.didAppear
+            .filter { binding.scrollTimerEnabled }
+            .sink { 
+                dependency.timerRepository.set() 
+            }
+            .store(in: &store.cancellables)
+        
+        input.didDisappear
+            .filter { binding.scrollTimerEnabled }
+            .sink { 
+                binding.scrollTimerEnabled = false
+                dependency.timerRepository.cancel() 
+            }
+            .store(in: &store.cancellables)
+        
         input
             .didChangeOffset
             .assign(to: \.offset, on: store)
             .store(in: &store.cancellables)
         
-        timerRepository.timer
-            .dropFirst()
+        binding.$scrollTimerEnabled
+            .filter { $0 }
+            .sink { _ in dependency.timerRepository.set() }
+            .store(in: &store.cancellables)
+        
+        dependency.timerRepository.timer
+            .filter { binding.scrollTimerEnabled }
             .filter { !output.models.isEmpty }
             .map {
                 guard binding.scrollIndex < output.models.count-1 else { return 0 }
@@ -78,7 +109,5 @@ extension CarouselWrapperViewModel {
             }
             .assign(to: \.scrollIndex, on: binding)
             .store(in: &store.cancellables)
-        
-        timerRepository.set()
     }
 }
