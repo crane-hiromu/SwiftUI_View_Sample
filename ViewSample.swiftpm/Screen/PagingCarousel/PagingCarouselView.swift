@@ -6,21 +6,23 @@ struct PagingCarouselWarapperView: View {
     
     var body: some View {
         GeometryReader { proxy in
-            VStack {
-                PagingCarouselView(
-                    size: proxy.size,
-                    models: viewModel.output.models,
-                    scrollIndex: viewModel.$binding.scrollIndex,
-                    scrollOffset: viewModel.$binding.scrollOffset,
-                    didTapItem: { viewModel.input.didTapItem.send($0) },
-                    didScroll: { viewModel.input.didScroll.send($0) },
-                    didEndScroll: { viewModel.input.didEndScroll.send($0) }
-                )
-                .onAppear { viewModel.input.didAppear.send(()) }
-                .onDisappear { viewModel.input.didDisappear.send(()) }
-                
-                Toggle("Auto swipe enabled (4 sec): ", isOn: viewModel.$binding.scrollTimerEnabled)
-                    .frame(width: CarouselItemModel.itemWidth)
+            ScrollView(.vertical) {
+                VStack {
+                    PagingCarouselView(
+                        size: proxy.size,
+                        models: viewModel.output.models,
+                        scrollIndex: viewModel.$binding.scrollIndex,
+                        scrollOffset: viewModel.$binding.scrollOffset,
+                        didTapItem: { viewModel.input.didTapItem.send($0) },
+                        didScroll: { viewModel.input.didScroll.send($0) },
+                        didEndScroll: { viewModel.input.didEndScroll.send($0) }
+                    )
+                    .onAppear { viewModel.input.didAppear.send(()) }
+                    .onDisappear { viewModel.input.didDisappear.send(()) }
+                    
+                    Toggle("Auto swipe enabled (4 sec): ", isOn: viewModel.$binding.scrollTimerEnabled)
+                        .frame(width: CarouselItemModel.itemWidth)
+                }
             }
         }
     }
@@ -45,7 +47,7 @@ struct PagingCarouselView: View {
     }
     
     private var collection: some View {
-        LazyHStack(spacing: CarouselItemModel.itemSpacing) {
+        HStack(spacing: CarouselItemModel.itemSpacing) {
             ForEach(models, id: \.id) { model in
                 PagingCarouselItem(
                     model: model, 
