@@ -11,8 +11,10 @@ final class CarouselItemModel {
     
     var id: Int = UUID().hashValue
     var imageUrl: URL? = nil
+    var url: URL = URL(string: "https://www.google.com/")!
+    var openWithExternalBrowser: Bool = false
     
     static let stub: [CarouselItemModel] = [
-        .init(), .init(), .init()
+        .init(), .init(), .init(), .init(), .init()
     ]
 }

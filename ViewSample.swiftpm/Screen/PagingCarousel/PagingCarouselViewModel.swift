@@ -87,7 +87,10 @@ private extension PagingCarouselViewModel {
             .store(in: &cancellables)
         
         input.didTapItem
-            .sink { debugPrint("tap: \($0.id)") }
+            .sink { 
+                debugPrint("tap: \($0.url)") 
+                UIApplication.shared.open($0.url)
+            }
             .store(in: &cancellables)
         
         input.didScroll

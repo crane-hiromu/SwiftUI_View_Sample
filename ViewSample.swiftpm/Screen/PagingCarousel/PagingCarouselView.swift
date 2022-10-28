@@ -71,7 +71,7 @@ private struct PagingCarouselItem: View {
     let didTap: () -> Void
     
     var body: some View {
-        Button(action: didTap) {
+        HighlightButton(didTap: didTap) {
             Image("320x320")
                 .resizable()
                 .frame(
@@ -79,7 +79,5 @@ private struct PagingCarouselItem: View {
                     height: CarouselItemModel.itemWidth
                 )
         }
-        .buttonStyle(LongPressHighlightStyle())
     }
 }
-
