@@ -49,18 +49,11 @@ https://user-images.githubusercontent.com/24838521/195552389-689ad8e4-2b6b-436a-
 
 ## - Highlight Button
 
-
-
-https://user-images.githubusercontent.com/24838521/198498973-89ed0393-eb81-44c5-8529-38a44706045a.mp4
-
-
+https://user-images.githubusercontent.com/24838521/198499550-ac10b3d7-b373-4966-bd23-04ed40650dae.mp4
 
 <br>
 
 ## - Tag collection with blur (Custom Keyboard Toolbar)
 
-
-
-https://user-images.githubusercontent.com/24838521/198499064-7277dd5f-88a5-4d50-a2dc-7ea86a37fb94.mp4
-
+https://user-images.githubusercontent.com/24838521/198499559-582fcfc6-c9f1-4407-88d1-9dbdd81a94aa.mp4
 
