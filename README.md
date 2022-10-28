@@ -46,3 +46,21 @@ https://user-images.githubusercontent.com/24838521/195552389-689ad8e4-2b6b-436a-
 |<img width="397" alt="Screen Shot 2022-10-07 at 15 44 44" src="https://user-images.githubusercontent.com/24838521/194484997-58344c95-2a4c-441d-a1e5-210f366721cc.png">|<img width="748" alt="Screen Shot 2022-10-07 at 15 44 33" src="https://user-images.githubusercontent.com/24838521/194484992-27139684-fc86-43c4-8cc9-10574e7a8fdc.png">|
 
 <br>
+
+## - Highlight Button
+
+
+
+https://user-images.githubusercontent.com/24838521/198498973-89ed0393-eb81-44c5-8529-38a44706045a.mp4
+
+
+
+<br>
+
+## - Tag collection with blur (Custom Keyboard Toolbar)
+
+
+
+https://user-images.githubusercontent.com/24838521/198499064-7277dd5f-88a5-4d50-a2dc-7ea86a37fb94.mp4
+
+
