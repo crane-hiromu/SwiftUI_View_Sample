@@ -57,3 +57,9 @@ https://user-images.githubusercontent.com/24838521/198499550-ac10b3d7-b373-4966-
 
 https://user-images.githubusercontent.com/24838521/198499559-582fcfc6-c9f1-4407-88d1-9dbdd81a94aa.mp4
 
+## - Loading View
+
+https://user-images.githubusercontent.com/24838521/207302845-ab290415-13b8-4074-a37f-05bb60540346.mp4
+
+
+
