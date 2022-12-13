@@ -2,7 +2,7 @@ import SwiftUI
 
 // MARK: - View Type
 enum SampleType: Int, CaseIterable {
-    case tab, paging, carousel, pagingCarousel, rectangle, highlightButton, inputTag
+    case tab, paging, carousel, pagingCarousel, rectangle, highlightButton, inputTag, loading
     
     var title: String {
         switch self {
@@ -12,7 +12,8 @@ enum SampleType: Int, CaseIterable {
         case .pagingCarousel: return "Paging Carousel Sample"
         case .rectangle: return "Variable Rectangle Sample"
         case .highlightButton: return "Highlight Button"
-        case .inputTag: return "Custom Keyboard toolbar"
+        case .inputTag: return "Tag collection with blur\n (Custom Keyboard Toolbar)"
+        case .loading: return "Loading View"
         }
     }
     
@@ -34,6 +35,8 @@ enum SampleType: Int, CaseIterable {
             case .inputTag: 
                 let tags = ["tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8"]
                 InputTagView(viewModel: .init(binding: .init(tags: tags))).frame(width: 375, height: 50)
+            case .loading: 
+                SampleLoadingView()
             }
         }
     }
